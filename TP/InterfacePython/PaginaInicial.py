@@ -10,6 +10,9 @@ janela.title("Página inicial")
 #Configurar novas janelas em "testeNewWindow"
 
 
+#CLASS
+
+
 class Table:
     def __init__(self, root):
         for i in range(total_rows):
@@ -29,6 +32,10 @@ lst = [#Aqui que vai puxar dados do banco
 total_rows = len(lst)
 total_columns = len(lst[0])
 
+
+#DEFS
+
+
 def Pessoaclique():
     global novaJanela  # Declare a variável como global
     print("Informações na página principal")
@@ -38,33 +45,31 @@ def Pessoaclique():
     novaJanela.title("Informações pessoais")
     novaJanela.geometry("800x600")
     CTk.CTkLabel(novaJanela, text="Informações").pack()
-    retorna = CTk.CTkButton(novaJanela, text="Voltando para o  Inicio", command=retornar)
-    retorna.pack()
+    retorna = CTk.CTkButton(novaJanela, text="Voltando para o Inicio", command=retornar)
+    retorna.grid(padx=10, pady=10)
 
 def retornar():
     print("Retorna ao menu")
-    global novaJanela  # Declare a variável como global
     print("Retornou a página inicial")
-    janela.update()
-    janela.deiconify()
-    novaJanela.destroy()
 
 def Gradeclique():
-    global novaJanela
     print("Grade horária")
-    Table(janela)
-    retorna = CTk.CTkButton(novaJanela, text="Voltando para o  Inicio", command=retornar)
-    retorna.pack()
-
+    
 
 def Materiaclique():
     print("Matérias ofertadas")
+    
+
 
 def Historicoclique():
     print("Histórico")
+    
+def Sair():
+    print("Saindo...")
+    exit()
 
-def retornaPaginaInicial():
-    print("Retornou a página inicial")
+
+#BOTÕES
 
 botaoPessoa = CTk.CTkButton(janela, text="Informações pessoais", command=Pessoaclique)
 botaoPessoa.grid(padx=10, pady=10, column=0, row=0) #????, padx = distancia do canto da tela, pady = distancia entre os botões https://www.pythontutorial.net/tkinter/tkinter-grid/
@@ -77,5 +82,9 @@ botaoHistorico.grid(padx=10, pady=10, column=0, row=2)
 
 botaoGrHoraria = CTk.CTkButton(janela, text="Grade Horária", command=Gradeclique)
 botaoGrHoraria.grid(padx=10, pady=10, column=0, row=3)
+
+botaoSair = CTk.CTkButton(janela, text="Sair do programa", command=Sair)
+botaoSair.grid(padx=10, pady=10, column=0, row=4)
+
 
 janela.mainloop()

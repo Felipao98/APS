@@ -54,14 +54,67 @@ def abrir_janela():
         
         control.inserir_pessoa(cursor, (Nome, Matricula, Senha))
 
+        cursor.execute("SELECT * FROM MATERIAS")
+        dados = cursor.fetchall()
+
+        cursor.execute("SELECT * FROM HISTORICO")
+        dados_historico = cursor.fetchall()
+
+
         conn.commit()
         conn.close()
-        
-        
+
+        return dados
+        return dados_historico
+
         janela2.destroy()
     botao = ct.CTkButton(janela2, text="Finalizar", command=RegisterDataBase)
     botao.pack(padx=10, pady=10)
 
+def concluir_materia():
+    # Lógica para concluir uma matéria
+    janela_tabela = ct.CTkToplevel()
+    janela_tabela.title("Tabela de matérias")
+    janela_tabela.geometry("800x500")
+
+    tabela = ct.CTkTabview(janela_tabela, data=dados, headers=["Nome_materia", "ID", "Pre"])
+    tabela.pack(padx=10, pady=10)
+
+    print("Matéria concluída!")
+
+    janela_tabela.mainloop()
+
+
+def ver_historico():
+    # Lógica para ver o histórico do aluno
+    janela_historico = ct.CTkToplevel()
+    janela_historico.title("Historico do aluno")
+    janela_historico.geometry("800x500")
+
+    histórico = ct.CTkTabview(janela_historico, dataH=dados_historico, headers=["ID_aluno", "ID_materia"])
+    histórico.pack(padx=10, pady=10)
+
+    print("Historico do aluno!")
+
+    janela_historico.mainloop()
+
+
+def gerar_grade():
+    # Lógica para gerar a grade de disciplinas
+    janela_grade = ct.CTkToplevel()
+    janela_grade.title("Grade horaria")
+    janela_grade.geometry("800x500")
+
+    grade = ct.CTkTabview(janela_grade, data=dados, headers=["Nome_materia", "ID", "Pre"])
+    tabela.pack(padx=10, pady=10)
+
+    print("Grade gerada!")
+
+    janela_grade.mainloop()
+
+def remover_cadastro():
+    # Lógica para remover o cadastro do aluno
+    print("Cadastro removido!")
 
 
 def cliqueL():
@@ -70,7 +123,7 @@ def cliqueL():
     janela3.title("Menu principal")
     janela3.geometry("800x500")
 
-    botaoConcluir = ct.CTkButton(janela3, text="Concluir materia")
+    botaoConcluir = ct.CTkButton(janela3, text="Concluir materia", command=concluir_materia)
     botaoConcluir.pack(padx=10, pady=10)
 
     botaoHistorico = ct.CTkButton(janela3, text="Ver histórico")
